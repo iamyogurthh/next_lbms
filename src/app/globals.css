@@ -29,3 +29,7 @@
 .form_input {
   @apply min-w-[420px] px-[11px] py-[15px] border border-[#CDAEFF] mt-[18px] shadow-md;
 }
+
+.sidebar_items {
+  @apply w-[336px] h-[56px]  flex justify-center items-center text-[14px] font-bold;
+}
