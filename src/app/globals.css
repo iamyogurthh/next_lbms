@@ -13,3 +13,19 @@
 .section_title {
   @apply font-bold text-2xl;
 }
+
+.logo {
+  @apply font-bold text-[35px];
+}
+
+.active {
+  @apply bg-[#CDAEFF] text-[#4F378B] rounded-[100px];
+}
+
+.form_label {
+  @apply font-bold text-[16px] text-[#4F378B];
+}
+
+.form_input {
+  @apply min-w-[420px] px-[11px] py-[15px] border border-[#CDAEFF] mt-[18px] shadow-md;
+}

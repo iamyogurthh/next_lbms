@@ -22,7 +22,7 @@ const page = async ({ params }) => {
         <div>
           <h1 className="font-bold text-white  text-[72px] ">{book.title}</h1>
           <h2 className="font-medium text-[32px] mb-[32px]">{book.author}</h2>
-          <span className="text-[14px] bg-[#E7E7E7] px-[13px] py-[5px] rounded-[9px] font-medium shadow-custom3">
+          <span className="text-[14px] bg-[#ffffff] px-[13px] py-[5px] rounded-[20px] font-medium shadow-custom3">
             {book.genre}
           </span>
         </div>
