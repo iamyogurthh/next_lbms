@@ -1,13 +1,12 @@
 import React from 'react'
 import BookCard from './BookCard'
-import { bookData } from '@/libs/data'
 
-const BookList = () => {
-  const books = bookData
-  try {
-  } catch (error) {
-    console.log(error)
+const BookList = async () => {
+  const response = await fetch('http://localhost:3000//api/books')
+  if (!response.ok) {
+    throw new Error('Failed to fetch books')
   }
+  const books = await response.json()
 
   return (
     <div className="px-16 mt-16">

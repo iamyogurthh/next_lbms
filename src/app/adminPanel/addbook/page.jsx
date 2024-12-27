@@ -7,7 +7,7 @@ const page = () => {
       <h1 className="form_label">Upload Book Cover Image</h1>
       <label htmlFor="image">
         <Image
-          src={'/book_place_holder.png'}
+          src={'/defaultIcons/book_place_holder.png'}
           alt="book"
           width={100}
           height={173}
