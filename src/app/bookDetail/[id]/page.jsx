@@ -5,7 +5,7 @@ import React from 'react'
 const page = async ({ params }) => {
   const { id } = await params
   //const [book] = bookData.filter((book) => book._id === id)
-  const response = await fetch(`http://localhost:3000//api/books/${id}`)
+  const response = await fetch(`http://localhost:3000/api/books/${id}`)
   if (!response.ok) {
     throw new Error('Failed to fetch a book')
   }
