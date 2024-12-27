@@ -1,9 +1,13 @@
 import React from 'react'
 import BookCard from './BookCard'
-import { bookData } from '@/data'
+import { bookData } from '@/libs/data'
 
 const BookList = () => {
   const books = bookData
+  try {
+  } catch (error) {
+    console.log(error)
+  }
 
   return (
     <div className="px-16 mt-16">

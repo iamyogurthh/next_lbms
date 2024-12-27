@@ -1,4 +1,4 @@
-import { users } from '@/data'
+import { users } from '@/libs/data'
 import React from 'react'
 import UserTableItem from '@/components/AdminPanel/UserTableItem'
 
@@ -12,7 +12,7 @@ const page = () => {
             className=" w-[331px] h-[40px] rounded-[9999px] pl-[16px] shadow-custom3"
           />
           <img
-            src="/search.png"
+            src="/defaultIcons/search.png"
             alt="search"
             className="absolute right-5 hover:cursor-pointer"
           />
