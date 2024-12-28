@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
     name : String,
+    profileImage : {
+        type : String,
+        default : "/defaultIcons/user.png"
+    },
     email : {
         type : String,
         unique : true,
@@ -18,7 +22,7 @@ const userSchema = new mongoose.Schema({
     isAdmin : {
         type : Boolean,
         default : false,
-    }
+    },
 },{
     timestamps : true,
 });

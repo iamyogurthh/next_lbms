@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const page = () => {
-  const [image, setImage] = useState(false)
+  const [image, setImage] = useState('')
   const [data, setData] = useState({
     title: '',
     author: '',
@@ -25,8 +25,9 @@ const page = () => {
     })
   }
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault()
+    console.log('Image is from frontend', image)
     const formData = new FormData()
     formData.append('title', data.title)
     formData.append('author', data.author)
@@ -34,15 +35,16 @@ const page = () => {
     formData.append('description', data.description)
     formData.append('overview', data.overview)
     formData.append('qty', data.qty)
-    formData.append('coverImage', data.image)
+    formData.append('coverImage', image)
 
     try {
-      const response = fetch('http://localhost:3000/api/books', {
+      const response = await fetch('http://localhost:3000/api/books', {
         method: 'POST',
         body: formData,
       })
 
-      if (response.ok) {
+      console.log(response.status)
+      if (response.status) {
         toast.success('Book Posted')
         setImage(false)
         setData({
