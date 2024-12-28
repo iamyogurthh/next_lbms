@@ -17,10 +17,11 @@ const Header = ({ query }) => {
               action={'/'}
             >
               <input
-                placeholder="Search"
-                className="w-[331px] h-[40px] rounded-[9999px] pl-[16px] shadow-lg"
+                placeholder="Search in book title, author name or genre"
+                className="w-[400px] h-[40px] rounded-[9999px] pl-[16px] shadow-lg"
                 name="query"
                 defaultValue={query}
+                required
               />
 
               <div className="absolute right-5 flex items-center gap-1 justify-center">
