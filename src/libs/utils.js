@@ -36,3 +36,10 @@ export async function handleImage() {}
 // seedBookData().then(() => {
 //     console.log("Congratulation ! Data seeding is complete");
 // }).catch((err) => { console.log(err.message) });
+
+export function formatDate(dateInput) {
+  const date = new Date(dateInput)
+  return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1)
+    .toString()
+    .padStart(2, '0')}/${date.getFullYear()}`
+}
