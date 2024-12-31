@@ -15,7 +15,7 @@
 }
 
 .logo {
-  @apply font-bold text-[35px];
+  @apply font-black text-[35px];
 }
 
 .active {

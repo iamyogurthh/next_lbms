@@ -23,7 +23,7 @@ const Sidebar = () => {
           <li
             key={index}
             className={`sidebar_items ${
-              pathName === item.path ? 'active' : ''
+              pathName.startsWith(item.path) ? 'active' : ''
             }`}
           >
             <Link href={item.path}>{item.label}</Link>

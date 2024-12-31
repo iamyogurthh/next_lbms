@@ -2,6 +2,9 @@ import React from 'react'
 import Image from 'next/image'
 import { formatDate } from '@/libs/utils'
 
+import DeleteBookBtn from './DeleteBookBtn'
+import Link from 'next/link'
+
 const BookTableItem = ({ book }) => {
   const bookCreatedTime = formatDate(book.createdAt)
   const bookUpdatedTime = formatDate(book.updatedAt)
@@ -32,24 +35,20 @@ const BookTableItem = ({ book }) => {
         {bookUpdatedTime !== 'NaN/NaN/NaN' ? bookUpdatedTime : 'No Date'}
       </td>
       <td className="px-4 py-2 text-left">{book.qty}</td>
-      <td className="gap-6 px-4 py-2 text-left">
-        <button>
-          <Image
-            src={'/defaultIcons/edit.png'}
-            alt="edit"
-            width={24}
-            height={24}
-            className="mr-6"
-          />
+      <td className=" px-4 py-2">
+        <button className="mr-5">
+          <Link href={`/adminPanel/editbook/${book._id}`}>
+            <Image
+              src={'/defaultIcons/edit.png'}
+              alt="edit"
+              width={24}
+              height={24}
+              className="cursor-pointer"
+            />
+          </Link>
         </button>
-        <button>
-          <Image
-            src={'/defaultIcons/delete.png'}
-            alt="delete"
-            width={25}
-            height={25}
-          />
-        </button>
+
+        <DeleteBookBtn mongoId={book._id} />
       </td>
     </tr>
   )

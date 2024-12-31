@@ -28,3 +28,19 @@ export async function PUT(request, params) {
     console.log(error.message)
   }
 }
+
+export async function DELETE(request, { params }) {
+  try {
+    const { id } = await params
+    const result = await Book.findByIdAndDelete(id)
+    if (result) {
+      return NextResponse.json(
+        { message: 'Deleted Successfully' },
+        { status: 200 }
+      )
+    }
+    return NextResponse.json({ message: 'Not Found' }, { status: 404 })
+  } catch (error) {
+    console.log(error.message)
+  }
+}

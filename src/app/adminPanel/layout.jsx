@@ -1,6 +1,6 @@
 import Sidebar from '@/components/AdminPanel/Sidebar'
 import { ToastContainer } from 'react-toastify'
-
+import 'react-toastify/dist/ReactToastify.css'
 export const metadata = {
   title: 'Admin Pannel',
   description: 'Admin Pannel For LBMS',

@@ -1,19 +1,28 @@
 'use client'
-import Image from 'next/image'
 import React, { useState } from 'react'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
-const page = () => {
-  const [image, setImage] = useState('')
+const EditBookForm = ({
+  title,
+  author,
+  genre,
+  qty,
+  description,
+  overview,
+  coverImage,
+}) => {
+  const [image, setImage] = useState(coverImage || null)
   const [data, setData] = useState({
-    title: '',
-    author: '',
-    genre: '',
-    qty: 0,
-    description: '',
-    overview: '',
+    title,
+    author,
+    genre,
+    qty,
+    description,
+    overview,
   })
+  const rotuer = useRouter()
 
   const onChangeHandler = (event) => {
     const name = event.target.name
@@ -25,8 +34,16 @@ const page = () => {
     })
   }
 
+  const onChangeImage = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      setImage(URL.createObjectURL(file))
+    }
+  }
+
   const onSubmitHandler = async (e) => {
     e.preventDefault()
+
     const formData = new FormData()
     formData.append('title', data.title)
     formData.append('author', data.author)
@@ -38,22 +55,14 @@ const page = () => {
 
     try {
       const response = await fetch('http://localhost:3000/api/books', {
-        method: 'POST',
+        method: 'PUT',
         body: formData,
       })
 
       console.log(response.status)
       if (response.status) {
-        toast.success('Book Posted')
-        setImage(false)
-        setData({
-          title: '',
-          author: '',
-          genre: '',
-          qty: 0,
-          description: '',
-          overview: '',
-        })
+        toast.success('Book Edited Successfully')
+        rotuer.push('/adminPanel/editbook')
       } else {
         toast.error('Something went wrong')
       }
@@ -67,23 +76,14 @@ const page = () => {
       <h1 className="form_label">Upload Book Cover Image</h1>
       <label htmlFor="image">
         <Image
-          src={
-            !image
-              ? '/defaultIcons/book_place_holder.png'
-              : URL.createObjectURL(image)
-          }
+          src={image}
           alt="book"
           width={100}
           height={173}
           className="mt-[18px] shadow-custom3 min-w-[100px] min-h-[173px] object-cover"
         />
       </label>
-      <input
-        type="file"
-        id="image"
-        hidden
-        onChange={(e) => setImage(e.target.files[0])}
-      />
+      <input type="file" id="image" hidden onChange={onChangeImage} />
 
       <p className="form_label mt-8">Book Title</p>
       <input
@@ -155,10 +155,10 @@ const page = () => {
         type="submit"
         className="mt-8 bg-[#CDAEFF] px-[29px] py-[15px] font-bold text-[14px] text-[#4F378B]"
       >
-        ADD BOOK
+        Edit Book
       </button>
     </form>
   )
 }
 
-export default page
+export default EditBookForm
