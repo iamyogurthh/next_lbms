@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 const EditBookForm = ({
+  mongoId,
   title,
   author,
   genre,
@@ -14,6 +15,7 @@ const EditBookForm = ({
   coverImage,
 }) => {
   const [image, setImage] = useState(coverImage || null)
+  const [imageFile,setImageFile] = useState('');
   const [data, setData] = useState({
     title,
     author,
@@ -38,6 +40,7 @@ const EditBookForm = ({
     const file = e.target.files[0]
     if (file) {
       setImage(URL.createObjectURL(file))
+      setImageFile(file);
     }
   }
 
@@ -51,10 +54,10 @@ const EditBookForm = ({
     formData.append('description', data.description)
     formData.append('overview', data.overview)
     formData.append('qty', data.qty)
-    formData.append('coverImage', image)
+    formData.append('coverImage', imageFile);
 
     try {
-      const response = await fetch('http://localhost:3000/api/books', {
+      const response = await fetch(`http://localhost:3000/api/books/${mongoId}`, {
         method: 'PUT',
         body: formData,
       })

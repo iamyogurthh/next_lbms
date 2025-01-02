@@ -192,68 +192,14 @@ export const users = [
     password: 'cdef',
     isAdmin: false,
   },
-  {
-    _id: 'user9',
-    name: 'Phyo Wai Aung',
-    email: 'phyowaiaung@gmail.com',
-    phone: '09542317865',
-    password: 'yzab',
-    isAdmin: false,
-  },
-  {
-    _id: 'user10',
-    name: 'Thet Htar Wai',
-    email: 'thethtarwai@gmail.com',
-    phone: '09457892134',
-    password: 'cdef',
-    isAdmin: false,
-  },
-  {
-    _id: 'user9',
-    name: 'Phyo Wai Aung',
-    email: 'phyowaiaung@gmail.com',
-    phone: '09542317865',
-    password: 'yzab',
-    isAdmin: false,
-  },
-  {
-    _id: 'user10',
-    name: 'Thet Htar Wai',
-    email: 'thethtarwai@gmail.com',
-    phone: '09457892134',
-    password: 'cdef',
-    isAdmin: false,
-  },
-  {
-    _id: 'user9',
-    name: 'Phyo Wai Aung',
-    email: 'phyowaiaung@gmail.com',
-    phone: '09542317865',
-    password: 'yzab',
-    isAdmin: false,
-  },
-  {
-    _id: 'user10',
-    name: 'Thet Htar Wai',
-    email: 'thethtarwai@gmail.com',
-    phone: '09457892134',
-    password: 'cdef',
-    isAdmin: false,
-  },
-  {
-    _id: 'user9',
-    name: 'Phyo Wai Aung',
-    email: 'phyowaiaung@gmail.com',
-    phone: '09542317865',
-    password: 'yzab',
-    isAdmin: false,
-  },
-  {
-    _id: 'user10',
-    name: 'Thet Htar Wai',
-    email: 'thethtarwai@gmail.com',
-    phone: '09457892134',
-    password: 'cdef',
-    isAdmin: false,
-  },
-]
+];
+
+export async function seedBookData() {
+  try {
+    await connectdb()
+    await Book.deleteMany()
+    await Book.insertMany(bookData)
+  } catch (error) {
+    console.log(error.message)
+  }
+}

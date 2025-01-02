@@ -11,7 +11,7 @@ const bookSchema = new mongoose.Schema({
     overview: String,
     coverImage: {
         type: String,
-        default: '/defaultIcons/book_place_holder.png',
+        default: 'defaultIcons/book_place_holder.png',
     },
     qty: {
         type: Number,

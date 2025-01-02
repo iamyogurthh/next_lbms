@@ -1,13 +1,11 @@
 import Book from '@/models/Book'
 import { NextResponse } from 'next/server'
-import path from 'path'
-import { writeFile } from 'fs/promises'
-import { connectdb, getDataFromForm } from '@/libs/utils'
+import { connectdb, getDataFromForm, handleImage } from '@/libs/utils';
 
 export async function GET() {
   try {
     await connectdb()
-    const books = await Book.find().sort({ createdAt: -1 })
+    const books = await Book.find()
     return NextResponse.json(books, { status: 200 })
   } catch (error) {
     console.log(error.message)
@@ -16,19 +14,10 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    await connectdb()
-    const formdata = await request.formData()
-    const { title, qty, description, author, overview, genre, coverImage } =
-      getDataFromForm(
-        formdata,
-        'title',
-        'qty',
-        'description',
-        'author',
-        'overview',
-        'genre',
-        'coverImage'
-      )
+    await connectdb();
+    const formdata = await request.formData();
+    const { title, qty, description, author, overview, genre, coverImage } = getDataFromForm(formdata, "title", "qty", "description", "author", "overview", "genre", "coverImage");
+    console.log("I am coverImage in post",coverImage);
     const book = new Book({
       title,
       author,
@@ -36,29 +25,18 @@ export async function POST(request) {
       description,
       overview,
       genre,
-    })
+    });
     if (coverImage) {
-      const buffer = Buffer.from(await coverImage.arrayBuffer())
-      const filename = Date.now() + coverImage.name.replaceAll(' ', '_')
-      await writeFile(
-        path.join(process.cwd(), 'public/bookImages/', filename),
-        buffer
-      )
-      book.coverImage = `/bookImages/${filename}`
-      await book.save()
-      return NextResponse.json(
-        book,
-        { success: true, msg: 'Blog Added' },
-        { status: 200 }
-      )
+      const filename = await handleImage(coverImage);
+      book.coverImage = `/bookImages/${filename}`;
+      await book.save();
+      return NextResponse.json(book, { status: 201 });
     }
-    await book.save()
-    return NextResponse.json(book, { status: 200 })
+    await book.save();
+    return NextResponse.json(book, { status: 201 });
   } catch (error) {
-    console.log(error.message)
-    return NextResponse.json(
-      { success: false, msg: 'Post method error' },
-      { status: 500 }
-    )
+    console.log(error.message);
   }
 }
+
+

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
-import Book from '@/models/Book'
-import { bookData } from './data'
-
+import { writeFile } from 'fs/promises'
+import fs from 'fs'
+import path from 'path'
 export async function connectdb() {
   try {
     console.log(process.env.MONGO_URL)
@@ -14,28 +14,26 @@ export async function connectdb() {
 }
 
 export function getDataFromForm(formData, ...args) {
-  let data = {}
-  for (let i = 0; i < args.length; i++) {
-    data[args[i]] = formData.get(args[i])
-  }
-  return data
+    let data = {};
+    console.log("I am in the function");
+    for (let i = 0; i < args.length; i++) {
+        data[args[i]] = formData.get(args[i]);
+    }
+    return data;
 }
 
-export async function seedBookData() {
-  try {
-    await connectdb()
-    await Book.deleteMany()
-    await Book.insertMany(bookData)
-  } catch (error) {
-    console.log(error.message)
-  }
+
+export async function handleImage(coverImage){
+  console.log("I am in the handle image",coverImage);
+  const buffer = Buffer.from(await coverImage.arrayBuffer());
+  const filename = Date.now() + coverImage.name.replaceAll(" ", "_");
+  await writeFile(path.join(process.cwd(), "public/bookImages/", filename), buffer);
+  return filename;
 }
 
-export async function handleImage() {}
-
-// seedBookData().then(() => {
-//     console.log("Congratulation ! Data seeding is complete");
-// }).catch((err) => { console.log(err.message) });
+export function deleteCoverImage(coverImage){
+  fs.unlink(path.join(process.cwd(),'public',coverImage),()=>{});
+}
 
 export function formatDate(dateInput) {
   const date = new Date(dateInput)

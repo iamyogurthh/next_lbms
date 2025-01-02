@@ -17,6 +17,7 @@ const page = async ({ params }) => {
 
   return (
     <EditBookForm
+      mongoId={id}
       title={book.title}
       author={book.author}
       genre={book.genre}

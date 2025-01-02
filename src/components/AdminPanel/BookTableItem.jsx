@@ -39,7 +39,7 @@ const BookTableItem = ({ book }) => {
         <button className="mr-5">
           <Link href={`/adminPanel/editbook/${book._id}`}>
             <Image
-              src={'/defaultIcons/edit.png'}
+              src='/defaultIcons/edit.png'
               alt="edit"
               width={24}
               height={24}

@@ -1,0 +1,78 @@
+                            ### USER MANUAL ###
+
+    ### Books api
+
+Description = TO GET A LIST OF BOOKS ###
+URL = /api/books
+Method = GET
+Response = {
+    [
+        {
+    title: 'Becoming',
+    author: 'Michelle Obama',
+    genre: 'Memoir',
+    coverImage: '/bookImages/book10.jpg',
+    qty: 3,
+    description:
+      'A deeply personal memoir by the former First Lady, reflecting on her journey from childhood to the White House.',
+    overview:
+      'From her upbringing on the South Side of Chicago to her role as the First Lady of the United States, Michelle Obama shares her inspiring life story with grace, honesty, and an enduring commitment to making a difference.',
+  },
+  ...
+    ]
+}
+
+Description = TO GET A SPECIFIC BOOKS
+URL = /api/books/[id]
+Method = GET
+Response = {
+    title: 'Becoming',
+    author: 'Michelle Obama',
+    genre: 'Memoir',
+    coverImage: '/bookImages/book10.jpg',
+    qty: 3,
+    description:
+      'A deeply personal memoir by the former First Lady, reflecting on her journey from childhood to the White House.',
+    overview:
+      'From her upbringing on the South Side of Chicago to her role as the First Lady of the United States, Michelle Obama shares her inspiring life story with grace, honesty, and an enduring commitment to making a difference.',
+  }
+
+Description = To CREATE A NEW BOOK
+URL = /api/books/[id]
+Method = POST
+Request Body = {
+    title: 'Becoming',
+    author: 'Michelle Obama',
+    genre: 'Memoir',
+    coverImage: '/bookImages/book10.jpg',
+    qty: 3,
+    description:
+      'A deeply personal memoir by the former First Lady, reflecting on her journey from childhood to the White House.',
+    overview:
+      'From her upbringing on the South Side of Chicago to her role as the First Lady of the United States, Michelle Obama shares her inspiring life story with grace, honesty, and an enduring commitment to making a difference.',
+  }
+Response = The Same Book Object you just created.
+
+Description = To UPDATE A SPECIFIC BOOK
+URL = /api/books/[id]
+Method = PUT
+Request Body = {
+    title: 'Becoming',
+    author: 'Michelle Obama',
+    genre: 'Memoir',
+    coverImage: '/bookImages/book10.jpg',
+    qty: 3,
+    description:
+      'A deeply personal memoir by the former First Lady, reflecting on her journey from childhood to the White House.',
+    overview:
+      'From her upbringing on the South Side of Chicago to her role as the First Lady of the United States, Michelle Obama shares her inspiring life story with grace, honesty, and an enduring commitment to making a difference.',
+  }
+Response = The Same Book Object you just updated.
+
+Description = TO DELETE A BOOK
+URL = /api/books/[id]
+Response = {
+    message : "Book deleted successfully"
+}
+
+
