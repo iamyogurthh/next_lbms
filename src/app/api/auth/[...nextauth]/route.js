@@ -23,7 +23,7 @@ const handler = NextAuth({
                     console.log("I am not correct")
                     return null;
                 }
-                return { id: user._id, email: user.email }
+                return { id: user._id, email: user.email , isAdmin : user.isAdmin}
                 
             }
         })
@@ -33,6 +33,7 @@ const handler = NextAuth({
             if (user) {
                 token.sub = user.id;
                 token.email = user.email;
+                token.isAdmin = user.isAdmin;
             }
             return token;
         },

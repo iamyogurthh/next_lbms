@@ -1,7 +1,26 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import Link from 'next/link'
+import { signIn } from 'next-auth/react'
 
 const page = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect : "/"
+    })
+    console.log(result)
+    if (result?.error) {
+      console.log("Wrong email or password")
+    } else {
+      console.log("successfully login ! ")
+    }
+  }
+
   return (
     <>
       <div className="bg-[#7A9DD5] h-[100vh] w-[100%] flex flex-col  items-center justify-center">
@@ -24,6 +43,7 @@ const page = () => {
               type="email"
               placeholder="example@gmail.com"
               className="mt-[8px] border min-w-full h-[40px] pl-[16px] rounded-lg border-[#D9D9D9] mb-[24px]"
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <label htmlFor="password" className="text-[16px]">
@@ -36,10 +56,11 @@ const page = () => {
               type="password"
               placeholder="Enter your password"
               className="mt-[8px] border min-w-full h-[40px] pl-[16px] rounded-lg border-[#D9D9D9] mb-[32px]"
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <div className="flex flex-col items-center w-full">
-              <button className="bg-black text-white py-[9px] w-full rounded-lg mb-[24px]">
+              <button type='submit' className="bg-black text-white py-[9px] w-full rounded-lg mb-[24px]" onClick={handleSignIn}>
                 Sign in
               </button>
               <p className="text-[16px]">

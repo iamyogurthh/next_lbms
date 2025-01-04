@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs"
 const userSchema = new mongoose.Schema({
-    name : String,
+    username : String,
     profileImage : {
         type : String,
-        default : "defaultIcons/user.png"
+        default : "/defaultIcons/user.png"
     },
     email : {
         type : String,
