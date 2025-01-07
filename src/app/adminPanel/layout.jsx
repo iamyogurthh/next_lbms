@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
       <ToastContainer theme="light" />
       <div className="flex ">
         <Sidebar />
-        <div className="flex-1 ml-[396px] p-8">{children}</div>
+        <div className="flex-1 ml-[396px] p-[34px]">{children}</div>
       </div>
     </>
   )

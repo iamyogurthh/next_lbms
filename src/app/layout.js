@@ -1,12 +1,16 @@
-import { Geist, Geist_Mono } from 'next/font/google'
+import Providers from '@/components/Providers'
 import './globals.css'
-import Header from '../components/Header'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="max-w-auto">{children}</div>
+        <ToastContainer theme="light" />
+        <Providers>
+          <div className="max-w-auto">{children}</div>
+        </Providers>
       </body>
     </html>
   )

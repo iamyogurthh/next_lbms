@@ -4,20 +4,20 @@ import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 
 const page = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const handleSignIn = async (e) => {
-    e.preventDefault();
-    const result = await signIn("credentials", {
+    e.preventDefault()
+    const result = await signIn('credentials', {
       email,
       password,
-      redirect : "/"
+      redirect: '/',
     })
     console.log(result)
     if (result?.error) {
-      console.log("Wrong email or password")
+      console.log('Wrong email or password')
     } else {
-      console.log("successfully login ! ")
+      console.log('successfully login ! ')
     }
   }
 
@@ -60,7 +60,11 @@ const page = () => {
             />
 
             <div className="flex flex-col items-center w-full">
-              <button type='submit' className="bg-black text-white py-[9px] w-full rounded-lg mb-[24px]" onClick={handleSignIn}>
+              <button
+                type="submit"
+                className="bg-black text-white py-[9px] w-full rounded-lg mb-[24px]"
+                onClick={handleSignIn}
+              >
                 Sign in
               </button>
               <p className="text-[16px]">
