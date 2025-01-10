@@ -14,6 +14,7 @@ export async function GET(request, { params }) {
         return NextResponse.json({ "message": "No Book is found" })
     } catch (error) {
         console.log(error.message)
+        return NextResponse.json({ message: "An error occurred while processing the request." }, { status: 500 });
     }
 }
 
@@ -25,8 +26,8 @@ export async function PUT(request, { params }) {
         const book = await Book.findById(id);
         if (book) {
             const { title, qty, description, author, overview, genre, coverImage } = getDataFromForm(formdata, "title", "qty", "description", "author", "overview", "genre", "coverImage");
-            console.log("cover image in put is ",coverImage)
-            if(`/bookImages/${coverImage}` === coverImage || '/defaultIcons/book_place_holder.png' === coverImage) {
+            console.log("cover image in put is ", coverImage)
+            if (`/bookImages/${coverImage}` === coverImage || '/defaultIcons/book_place_holder.png' === coverImage) {
                 console.log("I am entering eqaul state")
                 book.title = title;
                 book.qty = qty;
@@ -65,6 +66,7 @@ export async function PUT(request, { params }) {
         return NextResponse.json({ "message": "No book is found" }, { status: 404 });
     } catch (error) {
         console.log(error.message);
+        return NextResponse.json({ message: "An error occurred while processing the request." }, { status: 500 });
     }
 }
 
@@ -84,5 +86,6 @@ export async function DELETE(request, { params }) {
         return NextResponse.json({ "message": "Not Found" }, { status: 404 });
     } catch (error) {
         console.log(error.message);
+        return NextResponse.json({ message: "An error occurred while processing the request." }, { status: 500 });
     }
 }

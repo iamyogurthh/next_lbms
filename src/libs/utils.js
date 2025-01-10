@@ -15,7 +15,6 @@ export async function connectdb() {
 
 export function getDataFromForm(formData, ...args) {
     let data = {};
-    console.log("I am in the function");
     for (let i = 0; i < args.length; i++) {
         data[args[i]] = formData.get(args[i]);
     }

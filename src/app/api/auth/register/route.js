@@ -21,7 +21,7 @@ export async function POST(request) {
             phone,
             password,
         });
-        return NextResponse.json({ username, email, phone }, { status: 200 });
+        return NextResponse.json({ username, email, phone, profileImage : newUser.profileImage }, { status: 200 });
     } catch (error) {
         console.log(error.message)
     }

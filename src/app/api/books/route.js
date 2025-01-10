@@ -46,5 +46,6 @@ export async function POST(request) {
     return NextResponse.json(book, { status: 201 })
   } catch (error) {
     console.log(error.message)
+    return NextResponse.json({ message: "An error occurred while processing the request." }, { status: 500 });
   }
 }

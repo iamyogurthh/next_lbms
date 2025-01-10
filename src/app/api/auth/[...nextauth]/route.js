@@ -33,7 +33,7 @@ const handler = NextAuth({
           console.log('I am not correct')
           return null
         }
-        return { id: user._id, email: user.email, isAdmin: user.isAdmin }
+        return { id: user._id, email: user.email, isAdmin: user.isAdmin, username: user.username }
       },
     }),
   ],
@@ -42,6 +42,7 @@ const handler = NextAuth({
       if (user) {
         token.sub = user.id
         token.email = user.email
+        token.username = user.username
         token.isAdmin = user.isAdmin
       }
       return token
@@ -49,6 +50,7 @@ const handler = NextAuth({
     async session({ session, token }) {
       session.user.id = token.sub
       session.user.email = token.email
+      session.user.username = token.username
       session.user.isAdmin = token.isAdmin
 
       return session

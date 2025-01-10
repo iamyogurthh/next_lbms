@@ -98,15 +98,11 @@ const BorrowBookForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const formData = new FormData()
-    formData.append('email', data.email)
-    formData.append('borrowedBooks', borrowedBooks)
-
-    const res = await fetch('http://localhost:3000/...', {
+    const res = await fetch(`http://localhost:3000/api/users/${data.email}/borrowBooks`, {
       method: 'POST',
-      body: formData,
+      body: JSON.stringify({ books: borrowedBooks }),
     })
-    const resData = await res.json()
+    const resData = await res.json();
     if (res.status == 200) {
       toast('Form submitted successfully.')
       resetForm()

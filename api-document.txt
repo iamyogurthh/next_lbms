@@ -3,8 +3,11 @@
     ### Books api && Users apis
 
 Description = TO GET A LIST OF BOOKS
+
 URL = /api/books
+
 Method = GET
+
 Response = {
     [
         {
@@ -13,12 +16,14 @@ Response = {
     genre: 'Memoir',
     coverImage: '/bookImages/book10.jpg',
     qty: 3,
-    description:
-      'A deeply personal memoir by the former First Lady, reflecting on her journey from childhood to the White House.',
-    overview:
-      'From her upbringing on the South Side of Chicago to her role as the First Lady of the United States, Michelle Obama shares her inspiring life story with grace, honesty, and an enduring commitment to making a difference.',
+    description: 'asdfdsfsdfdsfsdfasd,
+    overview: 'asdfdsafdsfasddf',
+    createdAt : 2025-01-10,
+    updatedAt : 2025-01-10,
   },
-  ...
+  ...,
+  createdAt : 2025-01-10,
+  updatedAt : 2025-01-10,
     ]
 }
 
@@ -27,81 +32,233 @@ Response = {
 
 
 Description = TO GET A SPECIFIC BOOKS
+
 URL = /api/books/[id]
+
 Method = GET
+
 Response = {
     title: 'Becoming',
     author: 'Michelle Obama',
     genre: 'Memoir',
     coverImage: '/bookImages/book10.jpg',
     qty: 3,
-    description:
-      'A deeply personal memoir by the former First Lady, reflecting on her journey from childhood to the White House.',
-    overview:
-      'From her upbringing on the South Side of Chicago to her role as the First Lady of the United States, Michelle Obama shares her inspiring life story with grace, honesty, and an enduring commitment to making a difference.',
+    description: 'A deeplyite House.',
+    overview: 'From her upbringing on t to making a difference.',
+    createdAt : 2025-01-10,
+    updatedAt : 2025-01-10,
   }
 
 ---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
 
 
 Description = To CREATE A NEW BOOK
+
 URL = /api/books/[id]
+
 Method = POST
+
 Request Body = {
     title: 'Becoming',
     author: 'Michelle Obama',
     genre: 'Memoir',
     coverImage: '/bookImages/book10.jpg',
     qty: 3,
-    description:
-      'A deeply ood to the White House',
-    overview:
-      'From her up a difference',
+    description: 'A deeply ood to the White House',
+    overview: 'From her up a difference',
   }
-Response = The Same Book Object you just created.
+
+Response = {
+    title: 'Becoming',
+    author: 'Michelle Obama',
+    genre: 'Memoir',
+    coverImage: '/bookImages/book10.jpg',
+    qty: 3,
+    description: 'A deeply ood to the White House',
+    overview: 'From her up a difference',
+    createdAt : 2025-01-10,
+    updatedAt : 2025-01-10,
+  }
 
 ---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
 
 Description = To UPDATE A SPECIFIC BOOK
+
 URL = /api/books/[id]
+
 Method = PUT
+
 Request Body = {
     title: 'Becoming',
     author: 'Michelle Obama',
     genre: 'Memoir',
     coverImage: '/bookImages/book10.jpg',
     qty: 3,
-    description:
-      'A deeply personal memoir by the former First Lady, reflecting on her journey from childhood to the White House.',
-    overview:
-      'From her upbringing on the South Side of Chicago to her role as the First Lady of the United States, Michelle Obama shares her inspiring life story with grace, honesty, and an enduring commitment to making a difference.',
+    description: 'asdfasdfa',
+    overview: 'asdfasdfa',
+    createdAt : 2025-01-10,
+    updatedAt : 2025-01-10,
   }
-Response = The Same Book Object you just updated.
+
+Response = { 
+  title: 'Becoming',
+  author: 'Michelle Obama',
+  genre: 'Memoir',
+  coverImage: '/bookImages/book10.jpg',
+  qty: 3,
+  description: 'asdfasdfa',
+  overview: 'asdfasdfa',
+  createdAt : 2025-01-10,
+  updatedAt : 2025-01-10,
+  }
 
 
 ---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
 
 
 Description = TO DELETE A BOOK
+
 URL = /api/books/[id]
+
+Method = DELETE
+
 Response = {
     message : "Book deleted successfully"
 }
 
 
----------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
----------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
+
+---------------++++++++++++++++----------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
+---------------++++++++++++++++ Users APIS +++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
+---------------++++++++++++++++----------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
 
 
+
+Description = TO GET A LIST OF Users
+
+URL = /api/users
+
+Method = GET
+
+Response = [
+    {
+        "_id": "677368700810946135e30478",
+        "profileImage": "/defaultIcons/user.png",
+        "email": "htetmyatko@gmail.com",
+        "phone": "09543871625",
+        "isAdmin": false,
+        "createdAt": "2024-12-31T03:43:44.693Z",
+        "updatedAt": "2024-12-31T03:43:44.693Z",
+        "__v": 0,
+        "username": "Htet Myat Ko"
+    },
+    ....
+]
+
+
+---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
 
 
 Description = TO REGISTER A USER
+
 URL = /api/auth/register
+
+Method = POST
+
 Request Body = {
   username : "your-username",
   password : "your-password",
   email : "your-email",
   phone : 091113343,
  }
-Response = The Same User Object **Without Password** you just created .
 
+Response = {
+  username : "your-username",
+  email : "your-email",
+  phone : 091113343,
+ }
+
+---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
+
+
+Description = TO DELETE A USER
+
+URL = /api/auth/delete
+
+Method = DELETE
+
+Request Body = {
+  
+ }
+
+Response = { message : "User deleted successfully" }
+
+
+
+ ---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
+
+
+ !!! TO 'signIn' and 'signOut' you are going to use the default route Nextjs had defined
+
+
+---------------++++++++++++++++------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
+---------------++++++++++++++++Borrow Retrun APIS+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
+---------------++++++++++++++++------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
+
+
+Description = TO BORROW A BOOK 
+
+URL = /api/users/[email]/borrowBooks
+
+Method = POST
+
+Request Body = {
+    "books" : [
+        {
+            "bookId" : "676e693645e9c32d1b55598d",
+            "dueDate" : "2025-1-8"
+        },
+        ......
+
+    ]
+}
+
+Response = {
+    "_id": "677fb613fa1c2d8257a84c67",
+    "email": "orson",
+    "books": [
+        {
+            "bookId": "676e693645e9c32d1b55598d",
+            "borrowDate": "2025-01-09T11:42:57.552Z",
+            "dueDate": "2025-01-07T17:30:00.000Z",
+            "_id": "677fb641fa1c2d8257a84c6e",
+            "createdAt": "2025-01-09T11:42:57.863Z",
+            "updatedAt": "2025-01-09T11:42:57.863Z"
+        },
+        ... # It will also include your previous borrow books
+    ],
+    "createdAt": "2025-01-09T11:42:11.094Z",
+    "updatedAt": "2025-01-10T16:11:56.226Z",
+    "__v": 3
+}
+
+
+ ---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
+
+Description = TO BORROW A BOOK 
+
+URL = /api/users/[email]/returnBooks/[borrowRecordId]/return
+
+Method = PUT
+
+Request Body = {
+  bookId : '676e693645e9c32d1b55598d'
+}
+
+Response = { message: "Book returned Successfully" }
+
+
+
+ ---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
+ ---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
+ ---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
