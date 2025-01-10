@@ -4,12 +4,12 @@ import UserTableItem from '@/components/AdminPanel/UserTableItem'
 
 const page = () => {
   return (
-    <div>
+    <div className="">
       <div className="flex justify-center">
         <form className="relative flex items-center">
           <input
             placeholder="Search"
-            className=" w-[331px] h-[40px] rounded-[9999px] pl-[16px] shadow-custom3"
+            className="w-[331px] h-[40px] rounded-full pl-4 shadow-custom3 border border-gray-300"
           />
           <img
             src="/defaultIcons/search.png"
@@ -18,34 +18,37 @@ const page = () => {
           />
         </form>
       </div>
-      <div className="mt-[34px] bg-[#FEF7FF]">
-        <table className="w-full ">
-          <thead className="text-left bg-white px-[16px]">
-            <tr>
-              <th scope="col" className="">
-                Name
-              </th>
-              <th scope="col" className="">
-                Created At
-              </th>
-              <th scope="col" className="">
-                Is Admin
-              </th>
-              <th scope="col" className="">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, index) => (
-              <UserTableItem
-                key={index}
-                name={user.name}
-                isAdmin={user.isAdmin}
-              />
-            ))}
-          </tbody>
-        </table>
+      <div className="mt-8 bg-[#FEF7FF] rounded-lg shadow">
+        <div className="overflow-y-auto overflow-hidden max-h-[83vh]">
+          <table className="w-full border-collapse text-sm text-left">
+            <thead className="sticky top-0 bg-white">
+              <tr className="bg-white">
+                <th className="py-3 px-4 border-b font-medium text-gray-600">
+                  Name
+                </th>
+                <th className="py-3 px-4 border-b font-medium text-gray-600">
+                  Created At
+                </th>
+                <th className="py-3 px-4 border-b font-medium text-gray-600">
+                  Is Admin
+                </th>
+                <th className="py-3 px-4 border-b font-medium text-gray-600">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, index) => (
+                <UserTableItem
+                  key={index}
+                  name={user.name}
+                  isAdmin={user.isAdmin}
+                  userId={user._id}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   )

@@ -25,7 +25,7 @@ const Header = ({ query }) => {
               />
 
               <div className="absolute right-5 flex items-center gap-1 justify-center">
-                {query && <SearchFormReset />}
+                {query && <SearchFormReset bringBackTo={'/'} />}
                 <button type="submit" className="hover:cursor-pointer">
                   <img src="/defaultIcons/search.png" alt="search" />
                 </button>

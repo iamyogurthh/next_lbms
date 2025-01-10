@@ -4,10 +4,10 @@ import { formatDate } from '@/libs/utils'
 
 import DeleteBookBtn from './DeleteBookBtn'
 import Link from 'next/link'
+import BookTableItem_BookId from './BookTableItem_BookId'
 
 const BookTableItem = ({ book }) => {
   const bookCreatedTime = formatDate(book.createdAt)
-  const bookUpdatedTime = formatDate(book.updatedAt)
 
   return (
     <tr className="border-b border-white">
@@ -28,27 +28,24 @@ const BookTableItem = ({ book }) => {
         </div>
       </th>
       <td className="px-4 py-2 text-left">{book.genre}</td>
+      <BookTableItem_BookId bookId={book._id} />
       <td className="px-4 py-2 text-left">
         {bookCreatedTime !== 'NaN/NaN/NaN' ? bookCreatedTime : 'No Date'}
       </td>
-      <td className="px-4 py-2 text-left">
-        {bookUpdatedTime !== 'NaN/NaN/NaN' ? bookUpdatedTime : 'No Date'}
-      </td>
       <td className="px-4 py-2 text-left">{book.qty}</td>
-      <td className=" px-4 py-2">
-        <button className="mr-5">
+      <td className="px-4 py-2 text-left">
+        <div className="flex items-center justify-center space-x-2">
           <Link href={`/adminPanel/editbook/${book._id}`}>
             <Image
-              src='/defaultIcons/edit.png'
+              src="/defaultIcons/edit.png"
               alt="edit"
               width={24}
               height={24}
               className="cursor-pointer"
             />
           </Link>
-        </button>
-
-        <DeleteBookBtn mongoId={book._id} />
+          <DeleteBookBtn mongoId={book._id} />
+        </div>
       </td>
     </tr>
   )

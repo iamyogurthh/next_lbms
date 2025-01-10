@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-const SearchFormReset = () => {
+const SearchFormReset = ({ bringBackTo }) => {
   const reset = () => {
     const form = document.querySelector('.search-form')
     if (form) {
@@ -12,7 +12,7 @@ const SearchFormReset = () => {
   }
   return (
     <button type="reset" onClick={reset}>
-      <Link href="/">
+      <Link href={bringBackTo}>
         <Image src={'/defaultIcons/close.png'} width={34} height={34} alt="x" />
       </Link>
     </button>
