@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-const BookCard = ({ title, author, genre, coverImage, id }) => {
+const BookCard = ({ title, author, genre, coverImage, id, qty }) => {
   return (
     <div className="p-[18px] box-shadow w-[240px] mb-10 hover:shadow-custom2">
       <Link href={`/bookDetail/${id}`}>
@@ -20,6 +20,7 @@ const BookCard = ({ title, author, genre, coverImage, id }) => {
       <span className="text-[12px] bg-[#E7E7E7] px-[12px] py-[3px] rounded-[9px] font-bold">
         {genre}
       </span>
+      <p className="text-[14px] mt-2">Available: {qty}</p>
     </div>
   )
 }

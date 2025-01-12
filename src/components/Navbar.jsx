@@ -23,7 +23,7 @@ const Navbar = () => {
           onMouseLeave={() => setIsHovered(false)}
         >
           <span className="text-[18px] font-bold cursor-pointer">
-            {session.user.email}
+            {session.user.username}
           </span>
           {isHovered && (
             <div className="absolute top-full w-full  right-0 bg-white bg-opacity-[70%] shadow-lg border rounded p-2 text-center">

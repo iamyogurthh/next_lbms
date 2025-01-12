@@ -22,6 +22,7 @@ const BookList = ({ books, query }) => {
               author={book.author}
               genre={book.genre}
               coverImage={book.coverImage}
+              qty={book.qty}
             />
           ))
         )}
