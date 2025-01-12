@@ -1,7 +1,8 @@
 import React from 'react'
 import BorrowedBooksTableItems from './BorrowedBooksTableItems'
 
-const BorrowedBooksTable = () => {
+const BorrowedBooksTable = ({ borrowBooks }) => {
+  console.log(borrowBooks)
   return (
     <div className="mt-8 bg-[#FEF7FF] p-4 rounded-lg shadow-md">
       <div className="overflow-y-auto max-h-[400px] ">
@@ -26,7 +27,9 @@ const BorrowedBooksTable = () => {
             </tr>
           </thead>
           <tbody>
-            <BorrowedBooksTableItems />
+            {borrowBooks.map((book, index) => (
+              <BorrowedBooksTableItems key={index} book={book} />
+            ))}
           </tbody>
         </table>
       </div>

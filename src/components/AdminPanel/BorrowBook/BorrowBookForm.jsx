@@ -98,14 +98,19 @@ const BorrowBookForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const res = await fetch(`http://localhost:3000/api/users/${data.email}/borrowBooks`, {
-      method: 'POST',
-      body: JSON.stringify({ books: borrowedBooks }),
-    })
-    const resData = await res.json();
+    const res = await fetch(
+      `http://localhost:3000/api/users/${data.email}/borrowBooks`,
+      {
+        method: 'POST',
+        body: JSON.stringify({ books: borrowedBooks }),
+      }
+    )
+    const resData = await res.json()
     if (res.status == 200) {
       toast('Form submitted successfully.')
       resetForm()
+    } else {
+      toast('Something went wrong. Please try again.')
     }
   }
   return (

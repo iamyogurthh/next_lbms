@@ -1,8 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { formatDate } from '@/libs/utils'
 
-const UserTableItem = ({ name, isAdmin, userId }) => {
+const UserTableItem = ({ name, isAdmin, userId, createdAt }) => {
+  const formattedDate = formatDate(createdAt)
   return (
     <tr className="border-b border-white">
       <th scope="row" className=" py-[8px] px-3 ">
@@ -19,7 +21,7 @@ const UserTableItem = ({ name, isAdmin, userId }) => {
           <p className="font-normal whitespace-nowrap">{name}</p>
         </Link>
       </th>
-      <td>22/7/2024</td>
+      <td>{formattedDate}</td>
       <td>{String(isAdmin)}</td>
       <td>
         <button>

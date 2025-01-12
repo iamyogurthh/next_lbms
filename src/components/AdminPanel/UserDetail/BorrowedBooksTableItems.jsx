@@ -1,7 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
+import { formatDate } from '@/libs/utils'
 
-const BorrowedBooksTableItems = () => {
+const BorrowedBooksTableItems = async ({ book }) => {
+  const bookId = book.bookId
+
+  const res = await fetch(`http://localhost:3000/api/books/${bookId}`)
+  if (!res.ok) {
+    throw new Error('Failed to fetch book')
+  }
+  const [data] = await res.json()
   return (
     <tr className="border-b h-[80px]">
       <th
@@ -10,15 +18,17 @@ const BorrowedBooksTableItems = () => {
       >
         <div className="flex gap-3 items-center">
           <div>
-            <p className="font-bold text-wrap">Atomic Habits</p>
-            <p className="font-normal whitespace-nowrap">James Clears</p>
-            <p className="font-bold text-[12px] text-gray-600">Self help</p>
+            <p className="font-bold text-wrap">{data.title}</p>
+            <p className="font-normal whitespace-nowrap">{data.author}</p>
+            <p className="font-bold text-[12px] text-gray-600">{data.genre}</p>
           </div>
         </div>
       </th>
-      <td className="px-4 py-2 text-left align-middle font-bold">12/25/2024</td>
+      <td className="px-4 py-2 text-left align-middle font-bold">
+        {formatDate(book.borrowDate)}
+      </td>
       <td className="px-4 py-2 text-left align-middle text-red-500 font-bold">
-        12/30/2024
+        {formatDate(book.dueDate)}
       </td>
       <td className="px-4 py-2 text-left align-middle font-bold ">
         <button className="text-white bg-[#009F30] px-[10px] py-[5px] font-bold text-[12px] shadow-custom3 active:shadow-none rounded-[10px]">

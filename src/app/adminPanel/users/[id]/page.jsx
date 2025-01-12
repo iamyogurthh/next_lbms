@@ -2,23 +2,31 @@ import Link from 'next/link'
 import React from 'react'
 import BorrowedBooksTable from '@/components/AdminPanel/UserDetail/BorrowedBooksTable'
 
-const page = () => {
+const page = async ({ params }) => {
+  const { id } = await params
+  console.log(id)
+  const res = await fetch(`http://localhost:3000/api/users/${id}`)
+  if (!res.ok) {
+    throw new Error('Failed to fetch user')
+  }
+  const data = await res.json()
+
   const userDetailElements = [
     {
       label: 'Name:',
-      value: 'User 1',
+      value: data.user.username,
     },
     {
       label: 'Email:',
-      value: 'user@gmail.com',
+      value: data.user.email,
     },
     {
       label: 'Phone:',
-      value: '09423685350',
+      value: data.user.phone,
     },
     {
       label: 'Created At:',
-      value: '12/25/2024',
+      value: data.user.createdAt,
     },
   ]
   return (
@@ -50,7 +58,7 @@ const page = () => {
           />
         </form>
       </div>
-      <BorrowedBooksTable />
+      <BorrowedBooksTable borrowBooks={data.borrowBooks} />
     </>
   )
 }

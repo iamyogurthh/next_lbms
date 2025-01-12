@@ -1,8 +1,13 @@
-import { users } from '@/libs/data'
 import React from 'react'
 import UserTableItem from '@/components/AdminPanel/UserTableItem'
 
-const page = () => {
+const page = async () => {
+  const res = await fetch('http://localhost:3000/api/users')
+  if (!res.ok) {
+    throw new Error('Failed to fetch users')
+  }
+  const users = await res.json()
+
   return (
     <div className="">
       <div className="flex justify-center">
@@ -41,9 +46,10 @@ const page = () => {
               {users.map((user, index) => (
                 <UserTableItem
                   key={index}
-                  name={user.name}
+                  name={user.username}
                   isAdmin={user.isAdmin}
                   userId={user._id}
+                  createdAt={user.createdAt}
                 />
               ))}
             </tbody>
