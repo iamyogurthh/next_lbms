@@ -5,7 +5,7 @@ import Book from "./Book";
 const bookRecordSchema = new mongoose.Schema({
     bookId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'book',
+        ref: 'Book',
         required: true,
     },
     borrowDate: {

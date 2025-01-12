@@ -30,18 +30,16 @@ export async function GET(request, { params }) {
 }
 
 export async function POST(request, { params }) {
-  try {
-    const { id: email } = await params
-    const { books } = await request.json()
-    console.log('books in frontends is ', books)
-    await connectdb()
-    const borrowRecord = await addBooksToBorrowReturnRecord(email, books)
-    return NextResponse.json(borrowRecord, { status: 200 })
-  } catch (error) {
-    console.log(error.message)
-    return NextResponse.json(
-      { message: 'User or Book is invalid' },
-      { status: 400 }
-    )
-  }
+    try {
+        const { id: email } = await params;
+        const { books } = await request.json();
+        console.log("books in frontends is ", books);
+        await connectdb();
+        const borrowRecord = await addBooksToBorrowReturnRecord(email, books);
+        console.log("the borrow record is ",borrowRecord);
+        return NextResponse.json(borrowRecord, { status: 200 })
+    } catch (error) {
+        console.log(error.message)
+        return NextResponse.json({ message: "User or Book is invalid" }, { status: 400 })
+    }
 }

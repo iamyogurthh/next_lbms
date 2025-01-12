@@ -7,7 +7,7 @@ export async function GET(request, { params }) {
     try {
         await connectdb();
         const { id } = await params;
-        const book = await Book.find({ "_id": id });
+        const book = await Book.findOne({ "_id": id });
         if (book) {
             return NextResponse.json(book, { status: 200 });
         }
