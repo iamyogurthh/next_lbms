@@ -25,15 +25,17 @@ const handler = NextAuth({
         if (!user) {
           return null
         }
-        console.log('I am exist user')
         const isPasswordCorrect = await user.comparePassword(
           credentials.password
         )
         if (!isPasswordCorrect) {
-          console.log('I am not correct')
           return null
         }
-        return { id: user._id, email: user.email, isAdmin: user.isAdmin, username: user.username }
+        return { 
+          id: user._id, 
+          email: user.email, 
+          isAdmin: user.isAdmin, 
+          username: user.username }
       },
     }),
   ],
@@ -52,7 +54,6 @@ const handler = NextAuth({
       session.user.email = token.email
       session.user.username = token.username
       session.user.isAdmin = token.isAdmin
-
       return session
     },
     async redirect({ baseUrl }) {

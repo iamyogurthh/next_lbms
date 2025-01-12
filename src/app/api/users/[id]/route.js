@@ -9,8 +9,13 @@ export async function GET(request, { params }) {
         await connectdb();
         const user = await User.findById(id).select('-password');
         if (user) {
-            const borrowRecord = await BorrowReturnRecord.findOne({email : user.email}).select(['-_id','-email']);
-            return NextResponse.json({user , borrowBooks : borrowRecord.books}, { status: 200 });
+            const borrowRecord = await BorrowReturnRecord.findOne({ email: user.email }).select('-_id -email').populate('books.bookId');
+            
+            if (borrowRecord) {
+                borrowRecord.books.sort((a,b)=> new Date(b.borrowDate) - new Date(a.borrowDate));
+                return NextResponse.json({ user, borrowBooks: borrowRecord.books }, { status: 200 });
+            }
+            return NextResponse.json(user, { status: 200 });
         }
         return NextResponse.json({ "message": "User not found" }, { status: 400 });
 

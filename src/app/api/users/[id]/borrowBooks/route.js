@@ -30,6 +30,7 @@ export async function POST(request, { params }) {
         console.log("books in frontends is ", books);
         await connectdb();
         const borrowRecord = await addBooksToBorrowReturnRecord(email, books);
+        console.log("the borrow record is ",borrowRecord);
         return NextResponse.json(borrowRecord, { status: 200 })
     } catch (error) {
         console.log(error.message)
