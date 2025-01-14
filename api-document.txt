@@ -295,11 +295,11 @@ Response = {
 
  ---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
 
-Description = TO BORROW A BOOK 
+Description = TO RETURN A BOOK 
 
 URL = /api/users/[email]/returnBooks/[borrowRecordId]/return
 
-Method = PUT
+Method = PUT 
 
 Request Body = {
   bookId : '676e693645e9c32d1b55598d'

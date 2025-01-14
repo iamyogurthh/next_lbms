@@ -4,7 +4,6 @@ import SearchFormReset from '@/components/SearchFormReset'
 
 const page = async ({ searchParams }) => {
   const query = (await searchParams).query
-  console.log(query)
 
   const response = await fetch('http://localhost:3000/api/books')
   if (!response.ok) {

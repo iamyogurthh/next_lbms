@@ -1,15 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 import { formatDate } from '@/libs/utils'
+import ReturnBookBtn from './ReturnBookBtn'
 
-const BorrowedBooksTableItems = async ({ book }) => {
-  const bookId = book.bookId
-
-  const res = await fetch(`http://localhost:3000/api/books/${bookId}`)
-  if (!res.ok) {
-    throw new Error('Failed to fetch book')
-  }
-  const [data] = await res.json()
+const BorrowedBooksTableItems = async ({ book, email, borrowRecordId }) => {
+  const formattedDate = formatDate(book.returnDate)
+  console.log(formattedDate)
   return (
     <tr className="border-b h-[80px]">
       <th
@@ -18,9 +14,13 @@ const BorrowedBooksTableItems = async ({ book }) => {
       >
         <div className="flex gap-3 items-center">
           <div>
-            <p className="font-bold text-wrap">{data.title}</p>
-            <p className="font-normal whitespace-nowrap">{data.author}</p>
-            <p className="font-bold text-[12px] text-gray-600">{data.genre}</p>
+            <p className="font-bold text-wrap">{book.bookId.title}</p>
+            <p className="font-normal whitespace-nowrap">
+              {book.bookId.author}
+            </p>
+            <p className="font-bold text-[12px] text-gray-600">
+              {book.bookId.genre}
+            </p>
           </div>
         </div>
       </th>
@@ -31,9 +31,15 @@ const BorrowedBooksTableItems = async ({ book }) => {
         {formatDate(book.dueDate)}
       </td>
       <td className="px-4 py-2 text-left align-middle font-bold ">
-        <button className="text-white bg-[#009F30] px-[10px] py-[5px] font-bold text-[12px] shadow-custom3 active:shadow-none rounded-[10px]">
-          Returned
-        </button>
+        {formattedDate && formattedDate !== 'NaN/NaN/NaN' ? (
+          formattedDate
+        ) : (
+          <ReturnBookBtn
+            bookId={book.bookId._id}
+            email={email}
+            borrowRecordId={borrowRecordId}
+          />
+        )}
       </td>
       <td className="px-4 py-2 align-middle">
         <button>

@@ -2,9 +2,11 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { formatDate } from '@/libs/utils'
+import DeleteUserBtn from './DeleteUserBtn'
 
 const UserTableItem = ({ name, isAdmin, userId, createdAt }) => {
   const formattedDate = formatDate(createdAt)
+
   return (
     <tr className="border-b border-white">
       <th scope="row" className=" py-[8px] px-3 ">
@@ -24,14 +26,7 @@ const UserTableItem = ({ name, isAdmin, userId, createdAt }) => {
       <td>{formattedDate}</td>
       <td>{String(isAdmin)}</td>
       <td>
-        <button>
-          <Image
-            src={'/defaultIcons/delete.png'}
-            alt="delete"
-            width={24}
-            height={24}
-          />
-        </button>
+        <DeleteUserBtn userId={userId} redirectTo={'/adminPanel/users'} />
       </td>
     </tr>
   )

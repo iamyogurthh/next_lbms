@@ -1,15 +1,19 @@
 import Link from 'next/link'
 import React from 'react'
 import BorrowedBooksTable from '@/components/AdminPanel/UserDetail/BorrowedBooksTable'
+import DeleteUserBtn from '@/components/AdminPanel/DeleteUserBtn'
+import { formatDate } from '@/libs/utils'
 
 const page = async ({ params }) => {
   const { id } = await params
-  console.log(id)
+
   const res = await fetch(`http://localhost:3000/api/users/${id}`)
   if (!res.ok) {
     throw new Error('Failed to fetch user')
   }
   const data = await res.json()
+
+  const formattedDate = formatDate(data.user.createdAt)
 
   const userDetailElements = [
     {
@@ -26,7 +30,7 @@ const page = async ({ params }) => {
     },
     {
       label: 'Created At:',
-      value: data.user.createdAt,
+      value: formattedDate,
     },
   ]
   return (
@@ -35,7 +39,12 @@ const page = async ({ params }) => {
         <h1 className="font-bold">
           <Link href={'/adminPanel/users'}>Back</Link>
         </h1>
-        <button className="font-bold text-red-500">Delete User</button>
+
+        <DeleteUserBtn
+          userId={data.user._id}
+          redirectTo={'/adminPanel/users'}
+          style={'text'}
+        />
       </div>
       <ul className="mt-[34px] mb-[26px]">
         {userDetailElements.map((element, index) => (
@@ -58,7 +67,15 @@ const page = async ({ params }) => {
           />
         </form>
       </div>
-      <BorrowedBooksTable borrowBooks={data.borrowBooks} />
+      {data.borrowBooks ? (
+        <BorrowedBooksTable
+          borrowBooks={data.borrowBooks}
+          email={data.user.email}
+          borrowRecordId={data.borrowRecordId}
+        />
+      ) : (
+        <h1 className="text-center font-bold">There is no book to display!</h1>
+      )}
     </>
   )
 }

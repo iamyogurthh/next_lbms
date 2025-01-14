@@ -1,26 +1,40 @@
 import React from 'react'
 import UserTableItem from '@/components/AdminPanel/UserTableItem'
+import SearchFormReset from '@/components/SearchFormReset'
 
-const page = async () => {
+const page = async ({ searchParams }) => {
+  const query = (await searchParams).query
+  console.log(query)
+
   const res = await fetch('http://localhost:3000/api/users')
   if (!res.ok) {
     throw new Error('Failed to fetch users')
   }
   const users = await res.json()
+  console.log(users)
 
+  const filteredUsers = query
+    ? users.filter((user) =>
+        user.username.toLowerCase().includes(query.toLowerCase())
+      )
+    : users
   return (
-    <div className="">
+    <div>
       <div className="flex justify-center">
         <form className="relative flex items-center">
           <input
             placeholder="Search"
             className="w-[331px] h-[40px] rounded-full pl-4 shadow-custom3 border border-gray-300"
+            name="query"
+            defaultValue={query}
+            required
           />
-          <img
-            src="/defaultIcons/search.png"
-            alt="search"
-            className="absolute right-5 hover:cursor-pointer"
-          />
+          <div className="absolute right-5 flex items-center gap-1 justify-center">
+            {query && <SearchFormReset bringBackTo={'/adminPanel/users'} />}
+            <button type="submit" className="hover:cursor-pointer">
+              <img src="/defaultIcons/search.png" alt="search" />
+            </button>
+          </div>
         </form>
       </div>
       <div className="mt-8 bg-[#FEF7FF] rounded-lg shadow">
@@ -43,7 +57,7 @@ const page = async () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, index) => (
+              {filteredUsers.map((user, index) => (
                 <UserTableItem
                   key={index}
                   name={user.username}
