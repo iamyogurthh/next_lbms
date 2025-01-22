@@ -1,7 +1,7 @@
 import React from 'react'
 import BorrowedBooksTableItems from './BorrowedBooksTableItems'
 
-const BorrowedBooksTable = ({ borrowBooks, email, borrowRecordId }) => {
+const BorrowedBooksTable = ({ borrowBooks, email}) => {
   return (
     <div className="mt-8 bg-[#FEF7FF] p-4 rounded-lg shadow-md">
       <div className="overflow-y-auto max-h-[400px] ">
@@ -31,7 +31,7 @@ const BorrowedBooksTable = ({ borrowBooks, email, borrowRecordId }) => {
                 key={index}
                 book={book}
                 email={email}
-                borrowRecordId={borrowRecordId}
+                borrowRecordId={book.borrowRecordId._id}
               />
             ))}
           </tbody>

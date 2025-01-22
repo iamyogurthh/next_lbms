@@ -177,30 +177,31 @@ Response = {
         "username": "Sai Eain Khant"
     },
     "borrowBooks": [
-      {
-          "bookId": {
-                "_id": "677636d390c76006983aec4a",
-                "title": "www",
-                "author": "wwww",
-                "genre": "www",
-                "description": "www",
-                "overview": "wwww",
-                "coverImage": "/bookImages/1735824547783adb.jpg",
-                "qty": 0,
-                "createdAt": "2025-01-02T06:48:51.966Z",
-                "updatedAt": "2025-01-11T02:39:44.059Z",
+        {
+            "borrowRecordId": {
+                "_id": "678949f48b029df52d171114",
+                "bookId": {
+                    "_id": "677636d390c76006983aec4a",
+                    "title": "www",
+                    "author": "wwww",
+                    "genre": "www",
+                    "description": "www",
+                    "overview": "wwww",
+                    "coverImage": "/bookImages/1735824547783adb.jpg",
+                    "qty": 99,
+                    "createdAt": "2025-01-02T06:48:51.966Z",
+                    "updatedAt": "2025-01-16T18:03:31.941Z",
+                    "__v": 0
+                },
+                "borrowDate": "2025-01-16T18:03:31.868Z",
+                "dueDate": "2025-01-22T00:00:00.000Z",
                 "__v": 0
             },
-            "borrowDate": "2025-01-11T02:39:43.994Z",
-            "dueDate": "2025-01-16T00:00:00.000Z",
-            "_id": "6781d9f026c408662e0b3371",
-            "createdAt": "2025-01-11T02:39:44.176Z",
-            "updatedAt": "2025-01-11T02:39:44.176Z"
-      },...
-        ]
-
+            "_id": "678949f48b029df52d171118"
+        },
+        .....
+    ]
 }
-
 
  !!!! If the user haven't borrowed a book the borrowBooks field will be omitted.
 
@@ -297,17 +298,30 @@ Response = {
 
 Description = TO RETURN A BOOK 
 
-URL = /api/users/[email]/returnBooks/[borrowRecordId]/return
+URL = /api/users/[email]/returnBook/return
 
 Method = PUT 
 
 Request Body = {
-  bookId : '676e693645e9c32d1b55598d'
+  borrowRecordId : '676e693645e9c32d1b55598d'
 }
 
-Response = { message: "Book returned Successfully" }
+Response = { returnDate : 2025-01-02T06:48:51.966Z }
 
 
+ ---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
+
+Description = TO DELETE A BORROW RECORD
+
+URL = /api/users/[email]/borrowBooks
+
+Method = DELETE
+
+Request Body = {
+    borrowRecordId : 'fdalferrwq4545',
+}
+
+Response = { message : "Deleted successfully" }
 
  ---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++
  ---------------++++++++++++++++-------------------+++++++++++++++-------------------+++++++++++++++++++++++++++-------------------------+++++++++++++++++++++++++

@@ -1,36 +1,32 @@
 import { connectdb } from '@/libs/utils'
 import BorrowReturnRecord from '@/models/BorrowReturnRecord'
 import User from '@/models/User'
+import Book from '@/models/Book'
 import { NextResponse } from 'next/server'
 
 export async function GET(request, { params }) {
   try {
     const { id } = await params
+    console.log("id is ",id)
     await connectdb()
-    const user = await User.findById(id).select('-password')
+    const user = await User.findById(id).select('-password');
     if (user) {
-      const borrowRecord = await BorrowReturnRecord.findOne({
-        email: user.email,
-      })
-        .select('-email')
-        .populate('books.bookId')
-
-      if (borrowRecord) {
-        borrowRecord.books.sort(
-          (a, b) => new Date(b.borrowDate) - new Date(a.borrowDate)
-        )
-        return NextResponse.json(
-          {
-            user,
-            borrowBooks: borrowRecord.books,
-            borrowRecordId: borrowRecord._id,
-          },
-          { status: 200 }
-        )
+      const borrowReturnRecord = await BorrowReturnRecord.findOne({ email: user.email, })
+        .select('-email -_id')
+        .populate({
+          path: 'books.borrowRecordId', populate: {
+            path: 'bookId', model: 'Book'
+          }
+        });
+        if (!borrowReturnRecord) {
+          return NextResponse.json({user},{status : 200});
       }
-      return NextResponse.json({ user }, { status: 200 })
+      return NextResponse.json({ 
+        user, 
+        borrowBooks: borrowReturnRecord.books,
+      }, { status: 200 })
     }
-    return NextResponse.json({ message: 'User not found' }, { status: 400 })
+    return NextResponse.json({ message: 'User not found' }, { status: 404 })
   } catch (error) {
     console.log(error.message)
     return NextResponse.json(

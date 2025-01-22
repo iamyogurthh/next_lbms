@@ -8,11 +8,7 @@ const page = async ({ params }) => {
   const { id } = await params
 
   const res = await fetch(`http://localhost:3000/api/users/${id}`)
-  if (!res.ok) {
-    throw new Error('Failed to fetch user')
-  }
   const data = await res.json()
-
   const formattedDate = formatDate(data.user.createdAt)
 
   const userDetailElements = [
@@ -67,11 +63,10 @@ const page = async ({ params }) => {
           />
         </form>
       </div>
-      {data.borrowBooks ? (
+      {data.borrowBooks && data.borrowBooks.length > 0 ? (
         <BorrowedBooksTable
           borrowBooks={data.borrowBooks}
           email={data.user.email}
-          borrowRecordId={data.borrowRecordId}
         />
       ) : (
         <h1 className="text-center font-bold">There is no book to display!</h1>

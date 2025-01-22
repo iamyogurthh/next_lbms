@@ -7,7 +7,7 @@ const page = async ({ params }) => {
   if (!response.ok) {
     throw new Error('Failed to fetch a book')
   }
-  const [book] = await response.json()
+  const book = await response.json()
   return (
     <>
       <div className="header_container">
