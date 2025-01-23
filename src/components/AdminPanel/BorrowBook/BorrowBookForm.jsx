@@ -20,6 +20,39 @@ const BorrowBookForm = () => {
   })
 
   const [borrowedBooks, setBorrowedBooks] = useState([])
+  const [suggestions, setSuggestions] = useState([])
+  const [selectedBook, setSelectedBook] = useState(null)
+
+  console.log(suggestions)
+
+  //Fetching suggestion list based on the input
+  const fetchSuggestions = async (searchQuery) => {
+    if (!searchQuery.trim()) {
+      setSuggestions([])
+      return
+    }
+
+    const res = await fetch(`http://localhost:3000/api/books`)
+    const data = await res.json()
+    const filteredData = data.filter((book) =>
+      book.title.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    setSuggestions(filteredData)
+  }
+
+  //handling selected book
+  const handleSelectedBook = (book) => {
+    setSelectedBook(book)
+    setBookData({
+      title: book.title,
+      author: book.author,
+      genre: book.genre,
+      bookId: book._id,
+      borrowedAt: '',
+      dueDate: '',
+    })
+    setSuggestions([])
+  }
 
   const onChangeHandler = (event) => {
     const name = event.target.name
@@ -43,10 +76,20 @@ const BorrowBookForm = () => {
         newData.dueDate = dueDate.toISOString().split('T')[0]
       }
 
+      if (name === 'title') {
+        setSelectedBook(null)
+        if (value.trim() === '') {
+          setSuggestions([])
+        } else {
+          fetchSuggestions(value)
+        }
+      }
+
       return newData
     })
   }
 
+  // To add a book into the temp list table
   const addBook = () => {
     if (
       bookData.title &&
@@ -65,11 +108,13 @@ const BorrowBookForm = () => {
         borrowedAt: '',
         dueDate: '',
       })
+      setSelectedBook(null)
     } else {
       alert('Please fill in all book fields.')
     }
   }
 
+  //To reset the form
   const resetForm = () => {
     setData({
       username: '',
@@ -167,8 +212,29 @@ const BorrowBookForm = () => {
         type="text"
         className="form_input"
         onChange={onChangeHandlerForBook}
-        value={bookData.title}
+        value={selectedBook ? selectedBook.title : bookData.title}
       />
+      {suggestions.length > 0 && (
+        <ul className="absolute bg-white border border-black ">
+          {suggestions.map((book, index) => (
+            <li
+              key={index}
+              className="cursor-pointer border-b-2  w-[500px] hover:bg-gray-200  px-[32px]"
+              onClick={() => handleSelectedBook(book)}
+            >
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="font-bold">{book.title}</p>
+                  <p>{book.author}</p>
+                  <p>{book.genre}</p>
+                </div>
+
+                <p>{book.qty}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
       <p className="form_label mt-[34px]">Author Name</p>
       <input
         name="author"
