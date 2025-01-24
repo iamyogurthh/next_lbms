@@ -23,8 +23,6 @@ const BorrowBookForm = () => {
   const [suggestions, setSuggestions] = useState([])
   const [selectedBook, setSelectedBook] = useState(null)
 
-  console.log(suggestions)
-
   //Fetching suggestion list based on the input
   const fetchSuggestions = async (searchQuery) => {
     if (!searchQuery.trim()) {
@@ -132,6 +130,7 @@ const BorrowBookForm = () => {
     setBorrowedBooks([])
   }
 
+  //for deleting book from the temp table
   const deleteBook = (bookId) => {
     setBorrowedBooks(
       borrowedBooks.filter((book) => {
@@ -212,7 +211,7 @@ const BorrowBookForm = () => {
         type="text"
         className="form_input"
         onChange={onChangeHandlerForBook}
-        value={selectedBook ? selectedBook.title : bookData.title}
+        value={bookData.title}
       />
       {suggestions.length > 0 && (
         <ul className="absolute bg-white border border-black ">
